@@ -13,17 +13,18 @@ const sortQuotes = (quotes, ascending) => {
 }
 
 const QuoteList = (props) => {
-
     const history = useHistory();
     const location = useLocation();
+    //URlSearchParams translate our query params to JS object. Its build into the browser
     const queryParams = new URLSearchParams(location.search);
+    //we should use get method of URLSearchParams object
     const isSortingAscending = queryParams.get("sort") === "asc";
 
     const sortedQuotes = sortQuotes(props.quotes, isSortingAscending);
 
     const sortClickHandler = () => {
         // history.push(`${location.pathname}?sort=${isSortingAscending ? 'dsc' : "asc"}`);
-        //it is the same
+        //it is the same but more readable approach
         history.push({
             pathname: location.pathname,
             search: `?sort=${isSortingAscending ? 'dsc' : "asc"}`

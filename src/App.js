@@ -5,10 +5,7 @@ import AddQuote from "./pages/AddQoute";
 import Layout from "./components/layout/Layout";
 import NotFound from "./pages/NotFound";
 
-
-
 function App() {
-
     return (
         <Layout>
             <Switch>
