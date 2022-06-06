@@ -1,6 +1,6 @@
 import QuoteItem from './QuoteItem';
 import classes from './QuoteList.module.css';
-import {useHistory, useLocation} from "react-router-dom";
+import {useHistory, useNavigate, useLocation} from "react-router-dom";
 
 const sortQuotes = (quotes, ascending) => {
     return quotes.sort((quoteA, quoteB) => {
@@ -13,7 +13,8 @@ const sortQuotes = (quotes, ascending) => {
 }
 
 const QuoteList = (props) => {
-    const history = useHistory();
+    // const history = useHistory();
+    const navigate = useNavigate();
     const location = useLocation();
     //URlSearchParams translate our query params to JS object. Its build into the browser
     const queryParams = new URLSearchParams(location.search);
@@ -25,10 +26,11 @@ const QuoteList = (props) => {
     const sortClickHandler = () => {
         // history.push(`${location.pathname}?sort=${isSortingAscending ? 'dsc' : "asc"}`);
         //it is the same but more readable approach
-        history.push({
-            pathname: location.pathname,
-            search: `?sort=${isSortingAscending ? 'dsc' : "asc"}`
-        })
+        // history.push({
+        //     pathname: location.pathname,
+        //     search: `?sort=${isSortingAscending ? 'dsc' : "asc"}`
+        // })
+        navigate(`${location.pathname}?sort=${isSortingAscending ? 'dsc' : "asc"}`);
     }
 
     return (

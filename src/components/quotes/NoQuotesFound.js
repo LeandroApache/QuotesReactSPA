@@ -3,8 +3,8 @@ import {Link, useRouteMatch} from "react-router-dom";
 
 const NoQuotesFound = () => {
 
-    const match = useRouteMatch();
-    console.log(match)
+    // const match = useRouteMatch();
+    // console.log(match)
 
   return (
     <div className={classes.noquotes}>

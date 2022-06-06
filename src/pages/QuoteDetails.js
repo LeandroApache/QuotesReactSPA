@@ -1,4 +1,4 @@
-import {Link, Route, useLocation, useParams, useRouteMatch} from "react-router-dom";
+import {Link, Outlet, Route, Routes, useLocation, useParams, useRouteMatch} from "react-router-dom";
 import Comments from "../components/comments/Comments";
 import HighlightedQuote from "../components/quotes/HighlightedQuote";
 import useHttp from "../components/hooks/use-http";
@@ -15,21 +15,18 @@ import NoQuotesFound from "../components/quotes/NoQuotesFound";
 
 const QuoteDetails = () => {
     const params = useParams();
-    console.log(params, " Params")
     //we destructed params for correct work of dependencies in useEffect
     const {quoteId} = params;
     const location = useLocation();
     //similar to useLocation but with more information about current page and URL
     //it is includes our path which was defined for our routes (like a placeholder) /quotes/:quoteId and url /quotes/1
-    const match = useRouteMatch();
+    // const match = useRouteMatch();
     const {sendRequest, data: loadedQuote, status, error} = useHttp(getSingleQuote, true);
     useEffect(()=>{
         sendRequest(quoteId);
     },[sendRequest, quoteId]);
 
-    console.log(loadedQuote)
-
-    const isCommentsShow = location.pathname === `${match.url}/comments`;
+    const isCommentsShow = location.pathname === `/quotes/${quoteId}/comments`;
 
     // const currentQuote = DUMMY_QUOTES.find(quote => quote.id == params.quoteId);
     if (status === "pending") {
@@ -54,13 +51,14 @@ const QuoteDetails = () => {
         <div className="centered">
             {/*for link we should use match.url because it is includes exact quoteId (not placeholder for it like match.path)*/}
             <Link className="btn--flat"
-                  to={isCommentsShow ? match.url : `${match.url}/comments`}>{isCommentsShow ? "Hide" : "Show"} comments</Link>
+                  to={isCommentsShow ? `` : `comments`}>{isCommentsShow ? "Hide" : "Show"} comments</Link>
         </div>
+        <Outlet/>
         {/*we can use our placeholder /quotes/:quoteId for our nested route !!!only for routes we can use match.path for DRY*/}
         {/*if we use match.url instead of match.path we cant access params.quoteId in Comment component*/}
-        <Route path={`${match.path}/comments`}>
-            <Comments/>
-        </Route>
+        {/*<Routes>*/}
+        {/*    <Route path={`comments`} element={<Comments/>}/>*/}
+        {/*</Routes>*/}
     </div>
 }
 

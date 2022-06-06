@@ -4,6 +4,8 @@ import {getAllQuotes} from "../components/lib/api";
 import useHttp from "../components/hooks/use-http";
 import LoadingSpinner from "../components/UI/LoadingSpinner";
 import NoQuotesFound from "../components/quotes/NoQuotesFound";
+import {Route, Routes} from "react-router-dom";
+import QuoteDetails from "./QuoteDetails";
 
 // const DUMMY_QUOTES = [
 //     {id: 1, author: "Illia", text: "Some text"},

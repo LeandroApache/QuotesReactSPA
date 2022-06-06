@@ -33,7 +33,7 @@ const QuoteForm = (props) => {
         <>
             {/*it is used for prevent leaving of the page by user during text entering*/}
             {/*we should add additional handler for submit form button*/}
-            <Prompt when={isEntering} message={(location) => "Are you sure that you want to leave this page?"}/>
+            {/*<Prompt when={isEntering} message={(location) => "Are you sure that you want to leave this page?"}/>*/}
             <Card>
                 <form onFocus={focusFormHandler} className={classes.form} onSubmit={submitFormHandler}>
                     {props.isLoading && (
